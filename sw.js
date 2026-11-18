@@ -1,5 +1,5 @@
 /* WASALNI service worker — static app shell only; Supabase/API requests stay network-only. */
-const CACHE_NAME = 'wasalni-shell-2026-11-18-ios-qr-route-fix-4';
+const CACHE_NAME = 'wasalni-shell-2026-11-18-campaign-ios-qr-fix-5';
 const APP_SHELL = [
   './',
   './index.html',
