@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102a43"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="وصلني"><title>WASALNI | وصلني</title>
+<style>
+:root{--navy:#102a43;--blue:#176b87;--bg:#f3f6f9;--ink:#172b4d;--muted:#65758b;--line:#dce4ec;--red:#b42318;--green:#087443}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+header{background:linear-gradient(120deg,#102a43,#176b87);color:#fff;padding:22px max(18px,calc((100% - 1050px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
+header h1{margin:0;font-size:25px}header p{margin:6px 0 0;color:#d7e9f1;font-size:13px}
+.wrap{max-width:1050px;margin:24px auto;padding:0 16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 5px 18px #102a4309}
+.hidden{display:none!important}h2{font-size:19px;margin:0 0 16px}.muted{color:var(--muted);font-size:13px;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:13px;margin:0 0 7px;font-weight:bold}
+.field input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;outline:none}
+.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #176b8718}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,.btn{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:bold;cursor:pointer;background:var(--navy);color:#fff}
+button.secondary{background:#e8eef4;color:var(--navy)}button.danger{background:#fff0ef;color:var(--red)}button:disabled{opacity:.5;cursor:not-allowed}
+.status{padding:11px 13px;border-radius:10px;background:#edf6fa;color:#164e63;margin-top:12px;font-size:13px;line-height:1.7}
+.status.error{background:#fff0ef;color:var(--red)}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.customer{border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.customer strong{display:block;margin-bottom:5px}.customer small{color:var(--muted)}
+.profile{max-width:560px;margin:35px auto}.profile .brand{font-weight:bold;color:var(--blue);font-size:14px;letter-spacing:1px}
+.public-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0 18px}
+.public-action{display:flex;min-height:76px;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:10px 6px;border-radius:12px;color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:bold;box-shadow:0 3px 10px #102a4314}
+.public-action .action-icon{font-size:23px;line-height:1}.public-action.call{background:#087443}.public-action.whatsapp{background:#159b55}
+.public-action.disabled{opacity:.4;pointer-events:none;filter:grayscale(1)}
+@media(max-width:420px){.public-actions{gap:6px}.public-action{font-size:11px;min-height:70px;padding:8px 3px}}
+.profile h1{font-size:26px;margin:10px 0 20px}.data{padding:13px 0;border-bottom:1px solid var(--line)}
+.data span{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.data strong{font-size:17px;direction:ltr;display:inline-block}
+.data a{color:var(--blue);text-decoration:none}.qrbox{background:#fff;border:1px dashed #b8c7d6;border-radius:12px;padding:14px;text-align:center;margin-top:12px;overflow-wrap:anywhere}
+.qrbox canvas,.qrbox img{margin:10px auto;display:block}.empty{text-align:center;color:var(--muted);padding:20px}
+.foot{text-align:center;color:var(--muted);font-size:12px;padding:20px}.customer-photo{width:76px;height:76px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 14px;border:3px solid #e5eef4}
+.profile-photo{width:116px;height:116px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 14px;border:4px solid #e5eef4}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:18px;background:#f9fbfd}
+.stat .number{font-size:32px;font-weight:bold;color:var(--blue);margin-top:8px}
+.stat .caption{font-size:13px;color:var(--muted)}
+.home-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.home-actions button{min-height:58px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.nav button{background:#e8eef4;color:var(--navy)}
+.nav button.active{background:var(--navy);color:white}
+.customer-state{font-size:12px;color:var(--muted);margin-top:6px}
+@media(max-width:620px){.grid,.stats,.home-actions{grid-template-columns:1fr}header{padding:18px}.customer{align-items:flex-start;flex-direction:column}.topline{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div><h1>WASALNI | وصلني</h1><p>تواصل مباشر وسهل مع صاحب الغرض عبر رمز QR</p></div><div id="headerState" class="muted" style="color:#e5f1f5">جاهز للربط</div></header>
+<main class="wrap">
+<section id="setup" class="card hidden"><h2>إعداد الربط لأول مرة</h2><p class="muted">ضع بيانات مشروع Supabase مرة واحدة فقط.</p>
+<div class="grid"><div class="field"><label>رابط المشروع (Project URL)</label><input id="sbUrl" placeholder="https://xxxx.supabase.co" dir="ltr"></div>
+<div class="field"><label>المفتاح العام (Publishable / anon key)</label><input id="sbKey" placeholder="sb_publishable_..." dir="ltr"></div></div>
+<div class="actions"><button id="saveConfig">حفظ الربط</button><button class="secondary" id="clearConfig">مسح البيانات المحفوظة</button></div>
+<div id="setupMsg" class="status">لا تدخل Service Role Key هنا. استخدم المفتاح العام فقط.</div></section>
+<section id="login" class="card hidden"><h2>دخول لوحة التحكم</h2><p class="muted">حساب المدير تنشئه أنت من لوحة Supabase. التسجيل العام غير متاح من التطبيق.</p>
+<div class="grid"><div class="field"><label>البريد الإلكتروني</label><input id="email" type="email" autocomplete="username" dir="ltr"></div>
+<div class="field"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password"></div></div>
+<div class="actions"><button id="loginBtn">دخول</button></div><div id="loginMsg" class="status">أدخل بيانات حساب المدير.</div></section>
+
+<section id="dashboard" class="hidden">
+<div class="card"><div class="topline"><div><h2 style="margin-bottom:5px">لوحة التحكم الرئيسية</h2><div class="muted">ملخص إدارة WASALNI</div></div><button class="secondary" id="logoutBtn">تسجيل الخروج</button></div></div>
+<div class="nav">
+<button id="homeTab" class="active">الرئيسية</button>
+<button id="customersTab">إدارة العملاء</button>
+
+</div>
+<section id="homeView">
+<div class="card"><h2>إحصائيات النظام</h2><div class="stats">
+<div class="stat"><div class="caption">إجمالي العملاء</div><div class="number" id="customerCount">—</div></div>
+
+<div class="stat"><div class="caption">مرات فتح صفحات QR</div><div class="number" id="scanCount">—</div></div>
+</div><div id="statsMsg" class="muted" style="margin-top:10px">جارٍ تحميل الإحصائيات...</div></div>
+<div class="card"><h2>إدارة WASALNI</h2><p class="muted">ابدأ بإضافة عميل جديد أو إدارة العملاء ورموز QR.</p>
+<div class="home-actions">
+<button id="addCustomerHome">＋ إضافة / تسجيل عميل جديد</button>
+<button class="secondary" id="manageCustomersHome">إدارة العملاء ورموز QR</button>
+
+</div></div>
+</section>
+
+<section id="customersView" class="hidden">
+<div class="card"><div class="topline"><div><h2 style="margin:0">إدارة العملاء</h2><div class="muted">إضافة العملاء وتعديل بياناتهم ورموز QR</div></div><button id="newCustomerBtn">＋ عميل جديد</button></div></div>
+<div id="customerFormCard" class="card hidden"><h2 id="formTitle">إضافة عميل جديد</h2><div class="grid">
+<div class="field"><label>اسم العميل *</label><input id="name" placeholder="الاسم بالكامل"></div>
+<div class="field"><label>رقم الهاتف *</label><input id="phone" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr"></div>
+<div class="field"><label>رقم واتساب</label><input id="whatsapp" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr"></div>
+<div class="field"><label>اسم شخص الطوارئ</label><input id="emergencyName" placeholder="اسم شخص للطوارئ"></div>
+<div class="field"><label>رقم الطوارئ</label><input id="emergencyPhone" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr"></div>
+<div class="field"><label>صورة العميل <span id="photoRequiredMark">*</span></label><input id="photo" type="file" accept="image/*"><small class="muted">الصورة مطلوبة عند تسجيل عميل جديد، واختيارية عند التعديل إذا كانت هناك صورة محفوظة (بحد أقصى 1.5 ميجابايت).</small></div>
+</div><div id="photoPreview" class="muted"></div>
+<div class="actions"><button id="saveCustomer">حفظ العميل</button><button class="secondary hidden" id="cancelEdit">إلغاء</button><button class="secondary" id="cancelNew">إغلاق النموذج</button></div>
+<div id="formMsg" class="status">الاسم ورقم الهاتف والصورة مطلوبة عند تسجيل عميل جديد.</div></div>
+<div class="card"><div class="topline"><h2 style="margin:0">العملاء المسجلون</h2><button class="secondary" id="refreshBtn">تحديث القائمة</button></div><div id="customersMsg" class="status" role="status">قائمة العملاء جاهزة للتحديث.</div><div id="customers"><div class="empty">جارٍ تحميل العملاء...</div></div></div>
+<div id="qrCard" class="card hidden"><div class="topline"><h2 style="margin:0">رمز QR للعميل</h2><button class="secondary" id="closeQr">إغلاق</button></div><div id="qrArea" class="qrbox"></div></div>
+</section>
+
+
+</section>
+
+<section id="publicProfile" class="profile hidden"><div class="card"><div class="brand">WASALNI | وصلني</div>
+<img id="publicPhoto" class="profile-photo hidden" alt="صورة العميل"><h1 id="publicName">بيانات العميل</h1>
+<div class="public-actions">
+<a id="callTile" class="public-action call disabled" href="#"><span class="action-icon">☎</span><span>اتصال</span></a>
+<a id="whatsappTile" class="public-action whatsapp disabled" href="#" target="_blank" rel="noopener"><span class="action-icon">◉</span><span>واتساب</span></a>
+
+</div>
+<div class="data"><span>الاتصال</span><strong><a id="publicPhone" href="#">—</a></strong></div>
+<div class="data"><span>واتساب</span><strong><a id="publicWhatsapp" href="#">—</a></strong></div>
+<div class="data"><span>شخص للطوارئ</span><strong id="publicEmergencyName">—</strong></div>
+<div class="data"><span>رقم الطوارئ</span><strong><a id="publicEmergencyPhone" href="#">—</a></strong></div>
+<p class="muted">هذه البيانات أتاحها صاحب الحساب لتسهيل التواصل عند الحاجة.</p></div>
+<div class="foot">WASALNI — وصلني</div></section>
+<div class="foot">WASALNI © وصلني</div></main>
+<script>
+/* WASALNI early public-QR routing: run before any third-party library loads. */
+(function(){
+  try {
+    var u = new URL(window.location.href);
+    var h = new URLSearchParams(u.hash.replace(/^#\/?/, ''));
+    var id = (u.searchParams.get('id') || h.get('id') || '').trim();
+    if (id) {
+      ['setup','login','dashboard'].forEach(function(x){var e=document.getElementById(x);if(e)e.classList.add('hidden');});
+      var p=document.getElementById('publicProfile');
+      if(p)p.classList.remove('hidden');
+      var n=document.getElementById('publicName');
+      if(n)n.textContent='جارٍ تحميل بيانات صاحب الغرض...';
+      window.__WASALNI_PUBLIC_QR_ID__=id;
+    }
+  } catch(e) { /* Main application performs its own route validation. */ }
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const WASALNI_BUILD='2026-11-18-ios-qr-route-fix-4';
+const $=id=>document.getElementById(id);let db=null,editingId=null,selectedPhoto=null;
+const cfg=()=>({url:localStorage.getItem('wasalni_url')||'',key:localStorage.getItem('wasalni_key')||''});
+function msg(id,t,err=false){$(id).textContent=t;$(id).classList.toggle('error',err)}
+function show(id,on=true){$(id).classList.toggle('hidden',!on)}
+function setView(view){
+ ['homeView','customersView'].forEach(id=>show(id,id===view));
+ [['homeTab','homeView'],['customersTab','customersView']].forEach(([b,v])=>$(b).classList.toggle('active',v===view));
+ if(view==='homeView')loadStats();if(view==='customersView')loadCustomers();
+}
+function init(){
+ // Fail closed: never expose the manager setup form on a public QR visit.
+ show('setup',false);show('login',false);show('dashboard',false);show('publicProfile',false);
+ const currentUrl=new URL(location.href);
+ // Accept legacy query links (?id=12) and fragment links (#id=12).
+ const hashParams=new URLSearchParams(currentUrl.hash.replace(/^#\/?/,''));
+ const isPublic=(currentUrl.searchParams.get('id')||hashParams.get('id')||'').trim();
+ if(isPublic){show('publicProfile');loadPublic(isPublic);return}
+ const c=cfg();
+ $('sbUrl').value=c.url;$('sbKey').value=c.key;show('customerFormCard',false);
+ if(c.url&&c.key&&window.supabase){db=window.supabase.createClient(c.url,c.key);show('login');checkSession()}
+ else{show('setup');show('login',false)}
+}
+$('saveConfig').onclick=()=>{const u=$('sbUrl').value.trim().replace(/\/$/,''),k=$('sbKey').value.trim();if(!u.startsWith('https://')||!k){msg('setupMsg','تأكد من رابط المشروع والمفتاح العام.',true);return}localStorage.setItem('wasalni_url',u);localStorage.setItem('wasalni_key',k);location.reload()};
+$('clearConfig').onclick=()=>{localStorage.removeItem('wasalni_url');localStorage.removeItem('wasalni_key');location.reload()};
+async function checkSession(){const {data}=await db.auth.getSession();if(data.session){show('login',false);show('dashboard');setView('homeView')}else{show('login');show('dashboard',false)}}
+$('loginBtn').onclick=async()=>{msg('loginMsg','جارٍ تسجيل الدخول...');const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){msg('loginMsg','تعذر الدخول: '+error.message,true);return}show('login',false);show('dashboard');setView('homeView')};
+$('logoutBtn').onclick=async()=>{await db.auth.signOut();show('dashboard',false);show('login')};
+$('homeTab').onclick=()=>setView('homeView');$('customersTab').onclick=()=>setView('customersView');
+$('addCustomerHome').onclick=()=>{setView('customersView');show('customerFormCard');clearForm();$('customerFormCard').scrollIntoView({behavior:'smooth'})};
+$('manageCustomersHome').onclick=()=>setView('customersView');
+$('newCustomerBtn').onclick=()=>{clearForm();show('customerFormCard');$('customerFormCard').scrollIntoView({behavior:'smooth'})};
+$('cancelNew').onclick=()=>show('customerFormCard',false);
+async function loadStats(){
+ if(!db)return;
+ $('customerCount').textContent='…';$('scanCount').textContent='…';msg('statsMsg','جارٍ تحديث الإحصائيات...');
+ const customers=await db.from('customers').select('id,qr_scans');
+ if(customers.error){$('customerCount').textContent='—';$('scanCount').textContent='—';msg('statsMsg','تعذر قراءة العملاء: '+customers.error.message,true)}
+ else{$('customerCount').textContent=customers.data.length;$('scanCount').textContent=customers.data.reduce((sum,c)=>sum+(Number(c.qr_scans)||0),0);msg('statsMsg','تم تحديث إحصائيات العملاء ومرات فتح صفحات QR.')}
+
+}
+
+function values(){return {name:$('name').value.trim(),phone:$('phone').value.trim(),whatsapp:$('whatsapp').value.trim(),emergency_name:$('emergencyName').value.trim(),emergency_phone:$('emergencyPhone').value.trim()}}
+function clearForm(){['name','phone','whatsapp','emergencyName','emergencyPhone','photo'].forEach(x=>$(x).value='');$('photoPreview').textContent='';selectedPhoto=null;editingId=null;$('formTitle').textContent='إضافة عميل جديد';$('saveCustomer').textContent='حفظ العميل';$('photo').required=true;show('photoRequiredMark');show('cancelEdit',false);msg('formMsg','الاسم ورقم الهاتف والصورة مطلوبة عند تسجيل عميل جديد.')}
+$('photo').onchange=()=>{const f=$('photo').files[0];if(!f){selectedPhoto=null;$('photoPreview').textContent='';return}if(!f.type.startsWith('image/')){msg('formMsg','اختار ملف صورة صالح.',true);$('photo').value='';selectedPhoto=null;return}if(f.size>1500000){msg('formMsg','حجم الصورة كبير. اختار صورة أقل من 1.5 ميجابايت.',true);$('photo').value='';selectedPhoto=null;return}const r=new FileReader();r.onload=()=>{selectedPhoto=r.result;$('photoPreview').innerHTML='<img class="customer-photo" src="'+selectedPhoto+'" alt="معاينة الصورة">'};r.readAsDataURL(f)};
+$('cancelEdit').onclick=()=>{clearForm();show('customerFormCard',false)};
+$('cancelNew').onclick=()=>{clearForm();show('customerFormCard',false)};
+$('saveCustomer').onclick=async()=>{
+ const v=values();if(!v.name||!v.phone){msg('formMsg','الاسم ورقم الهاتف مطلوبان.',true);return}
+ if(!editingId&&!selectedPhoto){msg('formMsg','صورة العميل مطلوبة عند تسجيل عميل جديد.',true);$('photo').focus();return}
+ msg('formMsg','جارٍ الحفظ...');$('saveCustomer').disabled=true;
+ if(selectedPhoto)v.photo_data=selectedPhoto;
+ let q=editingId?db.from('customers').update(v).eq('id',editingId):db.from('customers').insert(v);
+ const {error}=await q;$('saveCustomer').disabled=false;if(error){msg('formMsg','لم يتم الحفظ: '+error.message,true);return}
+ msg('formMsg','تم حفظ بيانات العميل بنجاح.');clearForm();show('customerFormCard',false);loadCustomers();loadStats()
+};
+async function loadCustomers(){
+ if(!db){msg('customersMsg','الاتصال بقاعدة البيانات غير جاهز. أعد تسجيل الدخول.',true);return}
+ const refresh=$('refreshBtn');
+ if(refresh)refresh.disabled=true;
+ msg('customersMsg','جارٍ تحديث قائمة العملاء...');
+ $('customers').innerHTML='<div class="empty">جارٍ تحميل العملاء...</div>';
+ try{
+  const {data,error}=await db.from('customers').select('*').order('created_at',{ascending:false});
+  if(error){$('customers').innerHTML='<div class="empty">تعذر تحميل العملاء.</div>';msg('customersMsg','فشل تحديث القائمة: '+error.message,true);return}
+  if(!data || !data.length){$('customers').innerHTML='<div class="empty">لا يوجد عملاء مسجلون حتى الآن.</div>';msg('customersMsg','تم التحديث. لا يوجد عملاء مسجلون.');return}
+  $('customers').innerHTML='';
+  data.forEach(c=>{
+   const el=document.createElement('div');el.className='customer';const info=document.createElement('div');
+   if(c.photo_data){const im=document.createElement('img');im.className='customer-photo';im.src=c.photo_data;im.alt='صورة العميل';info.appendChild(im)}
+   const nm=document.createElement('strong');nm.textContent=c.name||'';const ph=document.createElement('small');ph.dir='ltr';ph.textContent=c.phone||'';info.append(nm,ph);
+   const state=document.createElement('div');state.className='customer-state';state.textContent=(c.is_active===false?'QR معطّل':'QR مفعّل')+' — مرات فتح الصفحة: '+(Number(c.qr_scans)||0);info.append(state);
+   const actions=document.createElement('div');actions.className='actions';actions.style.margin='0';
+   const qr=document.createElement('button');qr.textContent='QR';qr.disabled=c.is_active===false;qr.onclick=()=>makeQr(c);actions.append(qr);
+   const edit=document.createElement('button');edit.textContent='تعديل';edit.className='secondary';edit.onclick=()=>editCustomer(c);actions.append(edit);
+   const toggle=document.createElement('button');toggle.textContent=c.is_active===false?'تفعيل QR':'تعطيل QR';toggle.className='secondary';toggle.onclick=()=>toggleCustomer(c);actions.append(toggle);
+   const archive=document.createElement('button');archive.textContent='أرشفة العميل';archive.className='danger';archive.onclick=()=>archiveCustomer(c);actions.append(archive);
+   const remove=document.createElement('button');remove.textContent='حذف نهائي';remove.className='danger';remove.onclick=()=>permanentlyDeleteCustomer(c);actions.append(remove);
+   el.append(info,actions);$('customers').appendChild(el)
+  });
+  msg('customersMsg','تم تحديث قائمة العملاء. عدد العملاء: '+data.length);
+ }catch(err){
+  $('customers').innerHTML='<div class="empty">حدث خطأ أثناء تحميل العملاء.</div>';
+  msg('customersMsg','خطأ أثناء تحديث القائمة: '+(err?.message||String(err)),true);
+ }finally{if(refresh)refresh.disabled=false}
+}
+function editCustomer(c){editingId=c.id;$('name').value=c.name||'';$('phone').value=c.phone||'';$('whatsapp').value=c.whatsapp||'';$('emergencyName').value=c.emergency_name||'';$('emergencyPhone').value=c.emergency_phone||'';selectedPhoto=null;$('photo').value='';$('photo').required=false;show('photoRequiredMark',false);$('photoPreview').textContent=c.photo_data?'الصورة الحالية محفوظة. اختار صورة جديدة لتغييرها.':'';$('formTitle').textContent='تعديل بيانات العميل';$('saveCustomer').textContent='حفظ التعديلات';msg('formMsg','يمكنك تعديل البيانات دون رفع صورة جديدة.');show('cancelEdit');show('customerFormCard');$('customerFormCard').scrollIntoView({behavior:'smooth'})}
+async function toggleCustomer(c){const next=c.is_active===false;const action=next?'تفعيل':'تعطيل';if(!confirm('هل تريد '+action+' رمز QR للعميل '+c.name+'؟'))return;const {error}=await db.from('customers').update({is_active:next}).eq('id',c.id);if(error){alert('تعذر تغيير حالة QR: '+error.message);return}loadCustomers()}
+async function archiveCustomer(c){if(!confirm('سيتم أرشفة العميل '+c.name+' وتعطيل QR مع الاحتفاظ ببيانات العميل. هل تريد المتابعة؟'))return;const {error}=await db.from('customers').update({is_active:false}).eq('id',c.id);if(error){alert('تعذر أرشفة العميل: '+error.message);return}loadCustomers();loadStats()}
+async function permanentlyDeleteCustomer(c){
+ if(!confirm('تحذير: حذف نهائي للعميل '+c.name+' من قاعدة البيانات. لا يمكن التراجع عن هذا الإجراء. هل أنت متأكد؟'))return;
+ msg('customersMsg','جارٍ حذف العميل '+c.name+'...');
+ try{
+  const {data,error}=await db.from('customers').delete().eq('id',c.id).select('id');
+  if(error){
+   msg('customersMsg','فشل حذف العميل: '+error.message,true);
+   alert('لم يتم الحذف. رسالة Supabase: '+error.message+'\\n\\nإذا كانت الرسالة permission denied أو violates row-level security، فالمشكلة في سياسة DELETE. وإذا كانت foreign key، فهناك سجل مرتبط بالعميل في قاعدة البيانات.');
+   return;
+  }
+  if(!data || data.length===0){
+   msg('customersMsg','لم يتم حذف أي سجل. غالبًا سياسة Supabase تمنع الحذف أو أن الحساب لا يملك صلاحية DELETE.',true);
+   alert('لم تحذف قاعدة البيانات أي سجل. راجع صلاحية DELETE في Supabase.');
+   return;
+  }
+  msg('customersMsg','تم حذف العميل نهائيًا. جارٍ تحديث القائمة...');
+  await loadCustomers();
+  await loadStats();
+ }catch(err){
+  msg('customersMsg','حدث خطأ أثناء الحذف: '+(err?.message||String(err)),true);
+  alert('حدث خطأ أثناء الحذف: '+(err?.message||String(err)));
+ }
+}
+$('refreshBtn').addEventListener('click',()=>loadCustomers());
+function makeQr(c){
+ // Use a fragment-based QR URL as a second transport for iOS/in-app browsers;
+ // keep the old ?id= links working in init() for already printed QR codes.
+ const url=location.origin+location.pathname+'#id='+encodeURIComponent(c.id);
+ show('qrCard');
+ $('qrArea').innerHTML='<strong>'+escapeHtml(c.name)+'</strong><p>رابط صفحة العميل:</p><p><a id="publicLink" href="'+url+'" target="_blank" rel="noopener" dir="ltr">'+url+'</a></p><div id="qrcode"></div><div class="actions" style="justify-content:center"><button id="downloadQr">تحميل صورة QR</button><button class="secondary" id="copyQr">نسخ رابط الصفحة</button><button class="secondary" id="openCustomer">فتح صفحة العميل</button></div><div id="qrMsg" class="muted">الرابط ظاهر بالأعلى حتى لو تعذر إنشاء صورة QR.</div>';
+ try{if(typeof QRCode==='undefined')throw new Error('مكتبة QR غير متاحة');new QRCode($('qrcode'),{text:url,width:190,height:190,colorDark:'#102a43',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H})}
+ catch(e){$('qrMsg').textContent='تعذر تحميل صورة QR تلقائيًا، لكن رابط صفحة العميل يعمل ويمكن نسخه.'}
+ $('downloadQr').onclick=()=>{const img=$('qrcode').querySelector('img'),canvas=$('qrcode').querySelector('canvas');const src=img?.src||(canvas?canvas.toDataURL('image/png'):null);if(!src){alert('صورة QR غير جاهزة. استخدم نسخ الرابط.');return}const a=document.createElement('a');a.href=src;a.download='WASALNI-'+c.id+'.png';a.click()};
+ $('copyQr').onclick=async()=>{try{await navigator.clipboard.writeText(url);alert('تم نسخ الرابط')}catch(e){prompt('انسخ الرابط من هنا:',url)}};
+ $('openCustomer').onclick=()=>window.open(url,'_blank');$('qrCard').scrollIntoView({behavior:'smooth'})
+}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('closeQr').onclick=()=>show('qrCard',false);
+let publicCustomerId=null,publicCustomerName="";
+async function loadPublic(id){
+ publicCustomerId=Number(id);
+ if(!Number.isInteger(publicCustomerId)||publicCustomerId<=0){$('publicName').textContent='رابط العميل غير صحيح.';return}
+ const saved=cfg();const c={url:saved.url||'https://lovxejkttuyiveoakmbj.supabase.co',key:saved.key||'sb_publishable_hDhulF92IFmk-D-QhQY6qA_c49NGS73'};
+ if(!window.supabase){$('publicName').textContent='تعذر تحميل مكتبة الاتصال. تحقق من الإنترنت ثم أعد المحاولة.';return}
+ db=window.supabase.createClient(c.url,c.key);
+ const {data,error}=await db.rpc('get_customer_public',{p_id:String(id)});
+ const row=Array.isArray(data)?data[0]:data;
+ if(error||!row){$('publicName').textContent='هذا الرمز غير متاح حاليًا. ربما تم تعطيله أو أن الرابط غير صحيح.';return}
+ publicCustomerName=row.name||'';
+ $('publicName').textContent=publicCustomerName||'بيانات العميل';
+ if(row.photo_data){$('publicPhoto').src=row.photo_data;show('publicPhoto')}else{show('publicPhoto',false)}
+ setPhone('publicPhone',row.phone);setPhone('publicWhatsapp',row.whatsapp,true);
+ setActionTile('callTile',row.phone,false);setActionTile('whatsappTile',row.whatsapp||row.phone,true);
+ $('publicEmergencyName').textContent=row.emergency_name||'غير مسجل';setPhone('publicEmergencyPhone',row.emergency_phone)
+}
+function normalizeEgyptNumber(value){let n=String(value||'').replace(/[^0-9]/g,'');if(n.startsWith('0'))n='20'+n.slice(1);return n}
+function setActionTile(id,value,isWhatsApp){const el=$(id);const n=normalizeEgyptNumber(value);if(!n){el.classList.add('disabled');el.removeAttribute('href');return}el.classList.remove('disabled');el.href=isWhatsApp?'https://wa.me/'+n:'tel:+'+n}
+
+function setPhone(id,n,wa=false){const a=$(id);if(!n){a.textContent='غير مسجل';a.removeAttribute('href');return}a.textContent=n;const clean=String(n).replace(/[^0-9+]/g,'');a.href=wa?'https://wa.me/'+clean.replace(/^\+/,''):'tel:'+clean}
+init();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js?v=20261118-ios-qr-route-fix-4',{updateViaCache:'none'}).then(reg=>reg.update()).catch(err => console.warn('PWA worker registration failed:', err));
+  });
+}
+</script></body></html>
