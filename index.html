@@ -19,6 +19,7 @@ button.secondary{background:#e8eef4;color:var(--navy)}button.danger{background:#
 .status.error{background:#fff0ef;color:var(--red)}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .customer{border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
 .customer strong{display:block;margin-bottom:5px}.customer small{color:var(--muted)}
+.campaign{background:#fff;border:3px solid #087443;border-radius:18px;padding:20px 16px;margin-bottom:16px;text-align:center;box-shadow:0 5px 18px #08744312}.campaign h2{color:#087443;font-size:21px;margin:0 0 10px}.campaign p{font-size:15px;line-height:1.9;margin:0 0 15px;color:#172b4d}.campaign-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.campaign-btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;padding:10px;border-radius:11px;color:#fff;text-decoration:none;font-weight:bold;font-size:14px}.campaign-btn.whatsapp{background:#159b55}.campaign-btn.facebook{background:#176b87}@media(max-width:360px){.campaign-actions{grid-template-columns:1fr}}
 .profile{max-width:560px;margin:35px auto}.profile .brand{font-weight:bold;color:var(--blue);font-size:14px;letter-spacing:1px}
 .public-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0 18px}
 .public-action{display:flex;min-height:76px;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:10px 6px;border-radius:12px;color:#fff;text-decoration:none;text-align:center;font-size:13px;font-weight:bold;box-shadow:0 3px 10px #102a4314}
@@ -97,7 +98,7 @@ button.secondary{background:#e8eef4;color:var(--navy)}button.danger{background:#
 
 </section>
 
-<section id="publicProfile" class="profile hidden"><div class="card"><div class="brand">WASALNI | وصلني</div>
+<section id="publicProfile" class="profile hidden"><div class="campaign"><h2>انضم إلى عائلة WASALNI</h2><p>كل حاجة غالية عليك.. تستاهل ترجعلك.</p><div class="campaign-actions"><a class="campaign-btn whatsapp" href="https://wa.me/message/E4M7SKOKTCEEJ1" target="_blank" rel="noopener">◉ تواصل عبر واتساب</a><a class="campaign-btn facebook" href="https://www.facebook.com/share/19hFk28S6D/" target="_blank" rel="noopener">f صفحة فيسبوك</a></div></div><div class="card"><div class="brand">WASALNI | وصلني</div>
 <img id="publicPhoto" class="profile-photo hidden" alt="صورة العميل"><h1 id="publicName">بيانات العميل</h1>
 <div class="public-actions">
 <a id="callTile" class="public-action call disabled" href="#"><span class="action-icon">☎</span><span>اتصال</span></a>
@@ -132,7 +133,7 @@ button.secondary{background:#e8eef4;color:var(--navy)}button.danger{background:#
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const WASALNI_BUILD='2026-11-18-ios-qr-route-fix-4';
+const WASALNI_BUILD='2026-11-18-campaign-ios-qr-fix-5';
 const $=id=>document.getElementById(id);let db=null,editingId=null,selectedPhoto=null;
 const cfg=()=>({url:localStorage.getItem('wasalni_url')||'',key:localStorage.getItem('wasalni_key')||''});
 function msg(id,t,err=false){$(id).textContent=t;$(id).classList.toggle('error',err)}
@@ -283,7 +284,7 @@ function setPhone(id,n,wa=false){const a=$(id);if(!n){a.textContent='غير مس
 init();
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js?v=20261118-ios-qr-route-fix-4',{updateViaCache:'none'}).then(reg=>reg.update()).catch(err => console.warn('PWA worker registration failed:', err));
+    navigator.serviceWorker.register('./sw.js?v=20261118-campaign-ios-qr-fix-5',{updateViaCache:'none'}).then(reg=>reg.update()).catch(err => console.warn('PWA worker registration failed:', err));
   });
 }
 </script></body></html>
